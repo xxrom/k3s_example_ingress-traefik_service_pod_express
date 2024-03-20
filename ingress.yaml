@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: express-test-ingress
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+    #ingressclass.kubernetes.io/is-default-class: "true"
+spec:
+  #ingressClassName: ingressClassName
+  rules:
+    - host: myapp.local
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: express-test-service
+              port:
+                number: 4000
